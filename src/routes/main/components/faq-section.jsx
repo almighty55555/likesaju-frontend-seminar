@@ -6,25 +6,27 @@ export const FAQSection = () => {
     {
       question: 'Q. 사주 운세를 확인하고 싶은데, 비용은 무료인가요?',
       answer:
-        '첫 번째 질문에 대한 답변입니다. 답변 내용은 어쩌구저쩌구입니다.\n첫 번째 질문에 대한 답변입니다. 답변 내용은 어쩌구저쩌구입니다.',
+        '통합운세는 무료로 제공됩니다. 테마별 운세(건강운, 취업/학업운, 연애운, 재물운)는 회 당 5P를 사용하여 확인할 수 있습니다.',
+    },
+
+    {
+      question: 'Q. 사주가 무엇인가요?',
+      answer:
+        '사주는 개인의 생년월일을 바탕으로 운명을 예측하는 한국 전통 점술의 일종입니다. 주로 음양오행 이론에 기반하며 사주팔자라고 불리는 연, 월, 일, 시의 네 가지 기둥으로 구성됩니다. 사주는 자신을 이해하고 더 나은 삶을 살아가도록 도와주는 가이드로 사용될 수 있습니다.',
     },
     {
-      question: 'Q. 어떤 기술이 활용되었나요?',
+      question: 'Q. 어떤 기술이 사용되었나요?',
       answer:
-        '두 번째 질문에 대한 답변입니다. 답변 내용은 어쩌구저쩌구입니다.\n두 번째 질문에 대한 답변입니다. 답변 내용은 어쩌구저쩌구입니다.',
-    },
-    {
-      question:
-        'Q. 세 번째 질문입니다. 한 줄까지 들어갈 수 있습니다. 그 이상은 말줄임표 처리합니다. 바로 이렇게... 이렇게... 이렇게... 이렇게... 이렇게...',
-      answer:
-        '세 번째 질문에 대한 답변입니다. 답변 내용은 어쩌구저쩌구입니다.\n세 번째 질문에 대한 답변입니다. 답변 내용은 어쩌구저쩌구입니다.',
+        'React, Django를 기반으로 WebSocket, Redux, Three.js 등이 사용되었습니다. 또한 12기 운영진들의 황금같은 1학기와 여름방학이...',
     },
   ];
 
   return (
     <SectionLayout>
       <div className="w-full h-full flex flex-col gap-[80px]">
-        <h3 className="text-left text-4xl nanum-extra-bold">FAQs</h3>
+        <h3 className="text-left text-4xl nanum-extra-bold dark:text-white">
+          FAQs
+        </h3>
         <div className="flex flex-col gap-[30px] justify-center">
           {faqAccordionInfo.map((accordion) => (
             <FAQAccordion
@@ -43,7 +45,7 @@ const FAQAccordion = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex flex-col rounded-xl px-[50px] py-10 shadow-2xl w-full gap-5">
+    <div className="flex flex-col rounded-xl px-[50px] py-10 shadow-xl w-full gap-5 dark:bg-neutral-400">
       <div className="flex justify-between items-center gap-5">
         <p className="text-xl font-bold truncate">{question}</p>
         <button

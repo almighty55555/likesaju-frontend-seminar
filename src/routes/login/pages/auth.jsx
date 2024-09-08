@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { kakaoSignIn } from 'apis/api';
 import { useDispatch } from 'react-redux';
-import { setLoginState, setUserProfile } from 'user-slice';
+import { setLoginState, setUserProfile } from '../../../redux/user-slice';
 
 function Auth() {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function Auth() {
         }
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return <></>;
 }

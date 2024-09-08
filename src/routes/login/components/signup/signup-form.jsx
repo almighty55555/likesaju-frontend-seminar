@@ -4,7 +4,7 @@ import { TextField } from '../../../../components/textfield';
 import { Divider } from '../divider';
 import { KakaoButton } from '../kakao-button';
 import { signUp, checkDuplicateUser } from '../../../../apis/api';
-import { setLoginState, setUserProfile } from 'user-slice';
+import { setLoginState, setUserProfile } from '../../../../redux/user-slice';
 import { useDispatch } from 'react-redux';
 
 export const SignUpForm = () => {

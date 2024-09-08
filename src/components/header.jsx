@@ -5,7 +5,7 @@ import coin from '../assets/icons/coin.png';
 import { removeCookie } from '../utils/cookie';
 import { signOut } from '../apis/api';
 import { useSelector, useDispatch } from 'react-redux';
-import { setLoginState, setUserProfile } from 'user-slice';
+import { setLoginState, setUserProfile } from '.././redux/user-slice';
 import { ProfileImage } from '../components/profile-image';
 
 export const Header = () => {

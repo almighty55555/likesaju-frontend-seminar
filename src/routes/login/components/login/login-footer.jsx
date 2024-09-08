@@ -1,5 +1,5 @@
 export const LoginFooter = ({ handleClick }) => (
-  <div className="text-center text-zinc-500 text-base font-normal font-['Pretendard'] underline leading-normal"
+  <div className="text-center text-zinc-500 text-base font-normal font-['Pretendard'] underline leading-normal cursor-pointer"
        onClick={handleClick}>
     계정이 없으신가요?
   </div>

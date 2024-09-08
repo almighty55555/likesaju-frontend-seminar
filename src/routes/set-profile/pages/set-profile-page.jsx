@@ -5,7 +5,7 @@ import { TextField } from '../../../components/textfield';
 import { Button } from '../../../components/button';
 import { userInfoUpdate } from 'apis/api';
 import { useDispatch } from 'react-redux';
-import { setUserProfile } from 'user-slice';
+import { setUserProfile } from '../../../redux/user-slice';
 
 const SetProfilePage = () => {
   const getRandomNumber = () => {

@@ -20,10 +20,10 @@ export const ShareSection = () => {
       <div className="w-full h-full flex flex-col gap-[80px]">
         <div className="w-full flex justify-between items-center">
           <div className="space-y-6">
-            <h3 className="text-left text-4xl nanum-extra-bold text-neutral-800">
+            <h3 className="text-left text-4xl nanum-extra-bold text-neutral-800 dark:text-white">
               사주 공유하기
             </h3>
-            <p className="text-xl font-bold text-neutral-800">
+            <p className="text-xl font-bold text-neutral-800 dark:text-white">
               채팅으로 사주를 공유해보세요
             </p>
           </div>
@@ -50,7 +50,7 @@ export const ShareSection = () => {
 
 const ShareCard = ({ title, description, img }) => {
   return (
-    <div className="flex flex-col rounded-xl shadow-md max-w-[450px] max-h-[378px] overflow-hidden">
+    <div className="flex flex-col rounded-xl shadow-md max-w-[450px] max-h-[378px] overflow-hidden dark:bg-neutral-400">
       <img src={img} alt={title} />
       <div className="p-5 flex flex-col items-start gap-1.5">
         <h4 className="text-base font-normal text-neutral-800">{title}</h4>
