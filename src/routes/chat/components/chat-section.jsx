@@ -7,7 +7,7 @@ export const ChatSection = () => {
   return (
     <>
       <ChatList />
-      {chatRoomId && <ChatRoom chatRoomId={chatRoomId} />}
+      {chatRoomId && <ChatRoom />}
     </>
   );
 };

@@ -151,3 +151,51 @@ export const reducePoint = async (point) => {
     return null;
   }
 };
+
+export const getUserList = async () => {
+  try {
+    const response = await instanceWithToken.get('/user/userinfo/');
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const createChatRoom = async (userId) => {
+  try {
+    const response = await instanceWithToken.post('/chatrooms/', {
+      user_id: userId,
+    });
+    if (response.status === 201) {
+      return response.data;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const getChatRoomList = async () => {
+  try {
+    const response = await instanceWithToken.get('/chatrooms/');
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const getMessageList = async (chatRoomId) => {
+  try {
+    const response = await instanceWithToken.get(
+      `/messages/?chat_room_id=${chatRoomId}`,
+    );
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};

@@ -1,25 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import circle from '../../assets/icons/radio-btn.png';
 import circle_selected from '../../assets/icons/radio-btn-selected.png';
-import profile1 from '../../assets/images/profile1.png';
-import profile2 from '../../assets/images/profile2.png';
-import profile3 from '../../assets/images/profile3.png';
-import profile4 from '../../assets/images/profile4.png';
-import profile5 from '../../assets/images/profile5.png';
-import profile6 from '../../assets/images/profile6.png';
-
-const ProfileComponent = ({ img, name, isSelected, onSelect }) => {
+import { useChatWebSocketContext } from 'routes/chat/contexts/chat-websocket-context';
+import { getUserList } from 'apis/api';
+import { ProfileImage } from 'components/profile-image';
+const ProfileComponent = ({ profileImageId, name, isSelected, onSelect }) => {
   return (
     <div
       className="flex flex-row w-full items-center justify-between px-4 py-3 hover:bg-[#EFF0F6] cursor-pointer"
       onClick={onSelect}
     >
       <div className="flex flex-row items-center gap-4">
-        <img
-          src={img}
-          alt="profile"
-          className="w-[64px] h-[64px] rounded-full"
-        />
+        <ProfileImage profileImageId={profileImageId} />
         <span className="text-[#170F49] font-bold text-lg">{name}</span>
       </div>
       <img
@@ -32,20 +24,54 @@ const ProfileComponent = ({ img, name, isSelected, onSelect }) => {
 };
 
 export const SajuShareModal = ({ setIsModalOpen }) => {
-  const [selectedProfile, setSelectedProfile] = useState(null);
+  const [profiles, setProfiles] = useState([]);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [searchText, setSearchText] = useState('');
+  const { sendJsonMessage } = useChatWebSocketContext();
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      try {
+        const data = await getUserList();
+        setProfiles(data);
+      } catch (error) {
+        console.error('Failed to fetch profiles', error);
+      }
+    };
 
-  const handleSelect = (name) => {
-    setSelectedProfile(name);
+    fetchProfiles();
+  }, []);
+
+  const handleSearch = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  const handleSelect = (id) => {
+    setSelectedUserId(id);
   };
 
   const onClickCancel = () => {
     alert('취소');
   };
 
-  const onClickShare = () => {
-    alert(`공유 대상: ${selectedProfile}`);
-  };
+  const onClickShare = async () => {
+    try {
+      if (!selectedUserId) {
+        alert('유저를 선택해주세요.');
+        return;
+      }
 
+      sendJsonMessage({
+        message: '내 사주 공유',
+        participant_id: selectedUserId,
+      });
+      setIsModalOpen(false);
+    } catch (error) {
+      alert('Failed to create chatroom. Please try again.');
+    }
+  };
+  const filteredProfiles = profiles.filter((profile) =>
+    profile.nickname.toLowerCase().includes(searchText.toLowerCase()),
+  );
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="w-[532px] bg-white rounded-[18px] shadow-md px-[30px] py-5">
@@ -100,45 +126,22 @@ export const SajuShareModal = ({ setIsModalOpen }) => {
               type="text"
               placeholder="닉네임 검색"
               className="w-full outline-none"
+              value={searchText}
+              onChange={handleSearch}
             />
           </div>
           <div className="flex flex-col w-full h-[314px] overflow-y-auto">
-            <ProfileComponent
-              img={profile1}
-              name="김세안"
-              isSelected={selectedProfile === '김세안'}
-              onSelect={() => handleSelect('김세안')}
-            />
-            <ProfileComponent
-              img={profile2}
-              name="조유진"
-              isSelected={selectedProfile === '조유진'}
-              onSelect={() => handleSelect('조유진')}
-            />
-            <ProfileComponent
-              img={profile3}
-              name="최주현"
-              isSelected={selectedProfile === '최주현'}
-              onSelect={() => handleSelect('최주현')}
-            />
-            <ProfileComponent
-              img={profile4}
-              name="박시현"
-              isSelected={selectedProfile === '박시현'}
-              onSelect={() => handleSelect('박시현')}
-            />
-            <ProfileComponent
-              img={profile5}
-              name="박평재"
-              isSelected={selectedProfile === '박평재'}
-              onSelect={() => handleSelect('박평재')}
-            />
-            <ProfileComponent
-              img={profile6}
-              name="제갈준영"
-              isSelected={selectedProfile === '제갈준영'}
-              onSelect={() => handleSelect('제갈준영')}
-            />
+            {filteredProfiles &&
+              filteredProfiles.map((value) => {
+                return (
+                  <ProfileComponent
+                    profileImageId={value.profilepic_id}
+                    name={value.nickname}
+                    isSelected={selectedUserId === value.user.id}
+                    onSelect={() => handleSelect(value.user.id)}
+                  />
+                );
+              })}
           </div>
           <div className="flex flex-row items-center justify-center gap-5">
             <button
