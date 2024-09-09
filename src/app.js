@@ -33,6 +33,7 @@ function App() {
               <Route path="/approval" element={<ApprovalPage />} />
               <Route path="/cancel" element={<CancelPage />} />
               <Route path="/fail" element={<FailPage />} />
+              <Route path="/test" element={<SajuPage />} />
             </Routes>
           </div>
         </div>
