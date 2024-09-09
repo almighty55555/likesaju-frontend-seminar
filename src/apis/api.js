@@ -199,3 +199,16 @@ export const getMessageList = async (chatRoomId) => {
     console.error(e);
   }
 };
+
+export const getSajuResult = async (birthDate) => {
+  try {
+    const response = await instance.post('/saju/', {
+      data: birthDate,
+    });
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (e) {
+    return "error";
+  }
+};

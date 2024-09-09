@@ -7,12 +7,11 @@ import dropdownArrow from 'assets/icons/dropdown-arrow.png';
 
 registerLocale('ko', ko);
 
-export const SajuSearchInput = ({ onSubmit }) => {
+export const SajuSearchInput = ({ onSubmit, birthDate, setBirthDate }) => {
   const titleClass = 'text-neutral-800 text-2xl font-bold pb-5';
 
   const [gender, setGender] = useState('');
   const [yearType, setYearType] = useState('');
-  const [birthDate, setBirthDate] = useState(null);
   const [birthTime, setBirthTime] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
 
