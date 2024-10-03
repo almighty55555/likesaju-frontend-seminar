@@ -129,7 +129,8 @@ export const paymentApprove = async (tid, pg_token) => {
   try {
       const res = await instanceWithToken.post("/payment/approve/", {
           "pg_token": pg_token,
-          "tid": tid
+          "tid": tid,
+          "cid": process.env.REACT_APP_KAKAO_PAY_CID
       });
       return res;
   } catch (e) {
