@@ -212,4 +212,3 @@ export const getSajuResult = async (birthDate) => {
   } catch (e) {
     return "error";
   }
-};
