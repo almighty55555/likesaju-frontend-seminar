@@ -16,13 +16,14 @@ const useChatWebSocket = () => {
     fetchData();
   }, [chatRoomId]);
 
-const socketUrl = 'ws://4.217.234.118:8000';
+// const socketUrl = 'ws://4.217.234.118:8000';
+const socketUrl = 'ws://localhost:8000'; // 로컬 호스트
 
-  const [reconnectionAttempt, setReconnectionAttempt] = useState(0);
-  const maxConnectionAttempts = 4;
-  const isWebSocketConnected = useRef(false);
+const [reconnectionAttempt, setReconnectionAttempt] = useState(0);
+const maxConnectionAttempts = 4;
+const isWebSocketConnected = useRef(false);
 
-  const { sendJsonMessage, getWebSocket } = useWebSocket(socketUrl, {
+const { sendJsonMessage, getWebSocket } = useWebSocket(socketUrl, {
     onOpen: async () => {
       try {
         const data = await getChatRoomList();
@@ -109,4 +110,5 @@ const socketUrl = 'ws://4.217.234.118:8000';
     sendJsonMessage,
   };
 };
+
 export default useChatWebSocket;
