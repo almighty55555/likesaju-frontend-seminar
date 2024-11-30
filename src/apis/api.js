@@ -123,7 +123,6 @@ export const paymentReady = async ({ point, price }) => {
     console.error(e);
   }
 };
-
 // 카카오페이 결제 승인 api
 export const paymentApprove = async (tid, pg_token) => {
   try {
@@ -204,4 +203,3 @@ export const getMessageList = async (chatRoomId) => {
     console.error(e);
   }
 };
-

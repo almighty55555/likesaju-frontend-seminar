@@ -2,6 +2,7 @@ import { MainSection } from 'routes/main/components/main-section';
 import { SajuSection } from 'routes/main/components/saju-section';
 import { ShareSection } from 'routes/main/components/share-section';
 import { FAQSection } from 'routes/main/components/faq-section';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleDarkMode } from '../../../redux/dark-slice';
 import { FiSun } from 'react-icons/fi';

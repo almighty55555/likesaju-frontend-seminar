@@ -4,6 +4,8 @@ import { Button } from '../../../components/button';
 import { OutputCardBack } from './output-card-back';
 import { SajuPurchaseModal } from '../../../components/modals/saju-purchase-modal';
 import { SajuShareModal } from '../../../components/modals/share-modal';
+import { useSelector } from 'react-redux';
+import { PointModal } from 'components/modals/point-modal';
 import locked from '../../../assets/images/locked.png';
 import { useSelector } from 'react-redux';
 import { PointModal } from 'components/modals/point-modal';
