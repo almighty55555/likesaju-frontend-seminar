@@ -1,20 +1,21 @@
-import React, { useEffect, useRef } from 'react';
+import React, { Suspense, useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF, OrbitControls } from '@react-three/drei';
+import { OrbitControls, useGLTF, useAnimations } from '@react-three/drei';
+import { LoopRepeat } from 'three';
 import lion from '../../../assets/lions/TalkFile_lion.glb.glb';
 import * as THREE from 'three';
-import { Suspense } from 'react';
 
 function Model({ step }) {
+  const group = useRef();
   const { scene, animations } = useGLTF(lion);
   const modelRef = useRef();
   const mixer = useRef(null);
 
-  // 애니메이션 초기화
   useEffect(() => {
+    // AnimationMixer 초기화
     mixer.current = new THREE.AnimationMixer(scene);
 
-    // 기본 애니메이션 재생
+    // 초기 애니메이션을 재생하거나 설정할 수 있습니다.
     const initialAction = mixer.current.clipAction(
       animations.find((clip) => clip.name === 'Armature|ShakeHand'),
     );
@@ -23,47 +24,55 @@ function Model({ step }) {
     }
 
     return () => {
-      // 컴포넌트 언마운트 시 모든 액션 정리
+      // 컴포넌트 언마운트 시 mixer 정리
       mixer.current.stopAllAction();
     };
   }, [scene, animations]);
 
-  // step 값에 따라 애니메이션 변경
   useEffect(() => {
     if (step === 0) {
       const shakeHandAction = mixer.current.clipAction(
         animations.find((clip) => clip.name === 'Armature|ShakeHand'),
       );
       if (shakeHandAction) {
-        shakeHandAction.reset().play();
+        console.log('Playing ShakeHand action');
+        // shakeHandAction.setLoop(LoopRepeat); // 애니메이션 반복 설정
+        shakeHandAction.reset().play(); // 애니메이션 재생
+      } else {
+        console.log('ShakeHand action not found');
       }
     } else if (step === 1) {
       const thinkAction = mixer.current.clipAction(
         animations.find((clip) => clip.name === 'Armature|Think'),
       );
       if (thinkAction) {
+        console.log('Playing Think action');
         thinkAction.reset().play();
+      } else {
+        console.log('Think action not found');
       }
     } else if (step === 2) {
       const completeAction = mixer.current.clipAction(
         animations.find((clip) => clip.name === 'Armature|Complete'),
       );
       if (completeAction) {
+        console.log('Playing Complete action');
         completeAction.reset().play();
+      } else {
+        console.log('Complete action not found');
       }
     }
-  }, [step, animations]);
+  }, [step]);
 
-  // 모델 업데이트: 회전, 위치, 크기 설정
   useFrame((state, delta) => {
     if (modelRef.current) {
-      modelRef.current.rotation.x = Math.PI / 2; // X축 기준 90도 회전
-      modelRef.current.rotation.y = Math.PI; // Y축 기본 상태 유지
-      modelRef.current.rotation.z = Math.PI / 2; // Z축 기준 180도 회전
-      modelRef.current.position.y = -1.5; // Y축 위치 조정
-      modelRef.current.scale.set(3, 3, 3); // 크기 설정
+      modelRef.current.rotation.x = Math.PI / 2; // X축 기준으로 90도 회전
+      modelRef.current.rotation.y = Math.PI; // Y축을 원래 상태로 유지
+      modelRef.current.rotation.z = Math.PI / 2; // Z축 기준으로 180도 회전
+      modelRef.current.position.y = -1.5; // Y축으로 -1.5만큼 이동
     }
-    mixer.current?.update(delta); // 애니메이션 믹서 업데이트
+    modelRef.current.scale.set(3, 3, 3);
+    mixer.current?.update(delta);
   });
 
   return <primitive object={scene} ref={modelRef} />;

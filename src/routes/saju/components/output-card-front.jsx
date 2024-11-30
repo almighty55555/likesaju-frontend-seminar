@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 export const OutputCardFront = ({ data }) => {
-  console.log(data);
   const [isHovered, setIsHovered] = useState(false);
 
   return (

@@ -12,7 +12,6 @@ export const ChatList = () => {
     useState(chatRoomList);
   const [searchText, setSearchText] = useState('');
   const userId = useSelector((state) => state.user.user?.id);
-
   useEffect(() => {
     if (searchText === '') {
       setFilteredChatRoomList(chatRoomList);
@@ -30,7 +29,7 @@ export const ChatList = () => {
   }, [chatRoomList, searchText]);
 
   return (
-    <section className="w-[400px] flex flex-col  h-[calc(100vh-80px)] overflow-y-auto border-r bg-[var(--background,#FFFFFF)]">
+    <section className="w-[400px] flex flex-col h-[calc(100vh-80px)] overflow-y-auto border-r bg-[var(--background,#FFFFFF)]">
       <div className="h-[154px] flex flex-col items-center">
         <div className="p-6 w-full flex justify-between">
           <ChatListTitle />

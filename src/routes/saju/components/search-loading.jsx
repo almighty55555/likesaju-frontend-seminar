@@ -7,6 +7,7 @@ const SajuSearchLoading = () => {
       <div className="text-neutral-800 text-[36px] font-extrabold nanum-extra-bold">
         사주 결과 분석 중
       </div>
+      <Lottie animationData={Loading} loop={true} />
       <Lottie className="w-[520px] h-[520px]" animationData={Loading} loop={true} />
     </div>
   );

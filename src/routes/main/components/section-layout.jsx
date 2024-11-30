@@ -5,6 +5,7 @@ export const SectionLayout = ({
   outerLayerClassName: _outerLayerClassName,
   innerLayerRef,
   innerLayerClassName: _innerLayerClassName,
+  innerLayerStyle,
 }) => {
   const outerLayerClassName = cn(
     'flex items-center justify-start w-screen h-screen border-b',

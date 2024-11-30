@@ -1,5 +1,3 @@
-//src/components/modals/share-modal.jsx
-
 import React, { useEffect, useState } from 'react';
 import circle from '../../assets/icons/radio-btn.png';
 import circle_selected from '../../assets/icons/radio-btn-selected.png';
@@ -25,12 +23,11 @@ const ProfileComponent = ({ profileImageId, name, isSelected, onSelect }) => {
   );
 };
 
-export const SajuShareModal = ({ OutputCardData, setIsModalOpen }) => {
+export const SajuShareModal = ({ setIsModalOpen }) => {
   const [profiles, setProfiles] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [searchText, setSearchText] = useState('');
   const { sendJsonMessage } = useChatWebSocketContext();
-
   useEffect(() => {
     const fetchProfiles = async () => {
       try {
@@ -53,7 +50,7 @@ export const SajuShareModal = ({ OutputCardData, setIsModalOpen }) => {
   };
 
   const onClickCancel = () => {
-    setIsModalOpen(false);
+    alert('취소');
   };
 
   const onClickShare = async () => {
@@ -62,24 +59,11 @@ export const SajuShareModal = ({ OutputCardData, setIsModalOpen }) => {
         alert('유저를 선택해주세요.');
         return;
       }
-      const formattedMessage =
-        '내 사주 공유' +
-        '<br>' +
-        `${OutputCardData[0].title}: ${OutputCardData[0].msg}` +
-        '<br>' +
-        `${OutputCardData[1].title}: ${OutputCardData[1].msg}` +
-        '<br>' +
-        `${OutputCardData[2].title}: ${OutputCardData[2].msg}` +
-        '<br>' +
-        `${OutputCardData[3].title}: ${OutputCardData[3].msg}`;
-
- 
 
       sendJsonMessage({
-        message: formattedMessage,
+        message: '내 사주 공유',
         participant_id: selectedUserId,
       });
-
       setIsModalOpen(false);
     } catch (error) {
       alert('Failed to create chatroom. Please try again.');

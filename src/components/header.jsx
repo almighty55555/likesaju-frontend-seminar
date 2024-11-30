@@ -7,6 +7,7 @@ import { signOut } from '../apis/api';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLoginState, setUserProfile } from '../redux/user-slice';
 import { ProfileImage } from '../components/profile-image';
+import { cn } from '../utils/cn';
 
 export const Header = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -63,17 +64,19 @@ export const Header = () => {
       <div className="flex flex-row items-center gap-[50px] mobile:gap-8">
         <Link
           to="/saju"
-          className={
-            location.pathname === '/saju' ? activeLinkStyle : linkStyle
-          }
+          className={cn(
+            'mobile:text-sm',
+            location.pathname === '/saju' ? activeLinkStyle : linkStyle,
+          )}
         >
           사주
         </Link>
         <Link
           to="/chat"
-          className={
-            location.pathname === '/chat' ? activeLinkStyle : linkStyle
-          }
+          className={cn(
+            'mobile:text-sm',
+            location.pathname === '/chat' ? activeLinkStyle : linkStyle,
+          )}
         >
           채팅
         </Link>

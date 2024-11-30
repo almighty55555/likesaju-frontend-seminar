@@ -53,7 +53,7 @@ export const ShareSection = () => {
 
 const ShareCard = ({ title, description, img }) => {
   return (
-    <div className="flex flex-col rounded-xl shadow-md max-w-[450px] max-h-[378px] overflow-hidden">
+    <div className="flex flex-col rounded-xl shadow-md max-w-[450px] max-h-[378px] overflow-hidden dark:bg-neutral-400">
       <img src={img} alt={title} />
       <div className="p-5 flex flex-col items-start gap-1.5">
         <h4 className="text-base font-normal text-neutral-800">{title}</h4>

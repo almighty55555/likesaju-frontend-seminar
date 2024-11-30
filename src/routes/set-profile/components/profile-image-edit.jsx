@@ -23,7 +23,7 @@ export const ProfileImageEdit = ({ profileImg, openModal }) => {
           />
         </div>
         <div onClick={openModal}>
-          <EditIcon className="left-[98px] top-[90px] absolute w-[46px] h-[46px]" />
+          <EditIcon className="left-[98px] top-[90px] absolute w-[46px] h-[46px] cursor-pointer" />
         </div>
       </div>
     </div>

@@ -7,7 +7,6 @@ import { SajuShareModal } from '../../../components/modals/share-modal';
 import locked from '../../../assets/images/locked.png';
 import { useSelector } from 'react-redux';
 import { PointModal } from 'components/modals/point-modal';
-import { ChatWebSocketProvider } from 'routes/chat/contexts/chat-websocket-context';
 
 export const SearchOutputTheme = () => {
   const OutputCardData = [
@@ -15,25 +14,25 @@ export const SearchOutputTheme = () => {
       title: '건강운',
       image: '/images/health.png',
       shadow: 'rgba(136, 73, 0, 0.30)',
-      msg: '오늘은 건강 면에서 무난한 하루가 될 것입니다. 특별한 건강 문제나 불편함 없이 일상을 보낼 수 있을 것입니다. 그러나 긴장이나 스트레스를 피하는 것이 중요합니다. 식이조절과 규칙적인 운동을 통해 건강을 유지하는 데 신경 써야 합니다.',
+      msg: JSON.parse(localStorage.getItem('sajuResult')).healthFortune[0].content,
     },
     {
       title: '취업/학업운',
       image: '/images/career.png',
       shadow: 'rgba(0, 15, 96, 0.30)',
-      msg: '취업이나 학업에서는 오늘 새로운 기회가 찾아올 수 있는 긍정적인 날입니다. 노력이 보상받을 수 있는 시기이니 성실하게 임하는 것이 중요합니다. 특히 의견을 주고 받는 상황에서 자신의 의견을 확실히 표현하는 것이 좋습니다.',
+      msg: JSON.parse(localStorage.getItem('sajuResult')).careerFortune[0].content,  
     },
     {
       title: '연애운',
       image: '/images/love.png',
       shadow: 'rgba(225, 0, 0, 0.30)',
-      msg: '연애 운세는 오늘 조금 불안정할 수 있습니다. 상대방과의 의사소통에 어려움이 있을 수 있으니 이해하려는 노력이 필요합니다. 감정의 변화에 따라 변동성이 있을 수 있으니 서로의 감정을 주고 받는 것에 주의를 기울이세요. ',
+      msg: JSON.parse(localStorage.getItem('sajuResult')).loveFortune[0].content,
     },
     {
       title: '재물운',
       image: '/images/wealth.png',
       shadow: 'rgba(103, 0, 152, 0.30)',
-      msg: '재물 운세는 오늘 자산 관리에 대한 새로운 아이디어나 기회가 찾아올 수 있는 날입니다. 금융 상품이나 투자에 관심을 가지고 다양한 정보를 모으는 것이 좋습니다. 소비와 절약에 대한 균형을 유지하는 것이 중요합니다.',
+      msg: JSON.parse(localStorage.getItem('sajuResult')).wealthFortune[0].content,
     },
   ];
 
